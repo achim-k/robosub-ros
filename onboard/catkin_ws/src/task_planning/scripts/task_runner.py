@@ -56,17 +56,65 @@ def main():
 
     # Run tasks
     try:
-        # Tasks to run
+        # # SUBMERGING
+        # tasks = [
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.4, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        # ]
+
+        # # MOVING FORWARD
+        # tasks = [
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.4, 0, 0, 0),
+        #                                     parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(7.5, 0, -0.3, 0, 0, 0),
+        #                                     parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(7.5, 0, -0.3, 0, 0, 0),
+        #                                     parent=Task.MAIN_ID)
+        # ]
+
+        # # MOVING RECTANGLE
+        # tasks = [
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.4, 0, 0, 0),
+        #                                     parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(3, 0.1, -0.1, 0, 0, 0),
+        #                                     parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, -1.2, -0.1, 0, 0, 0),
+        #                                     parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(-3, -0.1, -0.1, 0, 0, 0),
+        #                                     parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 1.2, -0.1, 0, 0, 0),
+        #                                     parent=Task.MAIN_ID)
+        # ]
+
+        # PREQUAL
         tasks = [
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.5, 0, 0, 0),
-                                          parent=Task.MAIN_ID)
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.6, 0, 0, 0),
+                                            parent=Task.MAIN_ID),
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(7.25, 0, -0.3, 0, 0, 0),
+                                            parent=Task.MAIN_ID),
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(7.25, 0, -0.3, 0, 0, 0),
+                                            parent=Task.MAIN_ID),
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0.6, -0.1, 0, 0, 0),
+                                            parent=Task.MAIN_ID),
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(3.5, 0.1, -0.1, 0, 0, 0),
+                                            parent=Task.MAIN_ID),
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, -1.2, -0.1, 0, 0, 0),
+                                            parent=Task.MAIN_ID),
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(-3.5, -0.1, -0.1, 0, 0, 0),
+                                            parent=Task.MAIN_ID),
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0.6, -0.1, 0, 0, 0),
+                                            parent=Task.MAIN_ID),
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(-7.5, 0, -0.3, 0, 0, 0),
+                                            parent=Task.MAIN_ID),
+            move_tasks.move_to_pose_local(geometry_utils.create_pose(-7.5, 0, -0.3, 0, 0, 0),
+                                            parent=Task.MAIN_ID)
         ]
 
         # Step through tasks, stopping if rospy is shutdown
         rate = rospy.Rate(30)
-        for t in tasks:
-            while not t.done and not rospy.is_shutdown():
-                t.step()
+        for task in tasks:
+            while not task.done and not rospy.is_shutdown():
+                task.step()
                 rate.sleep()
             if rospy.is_shutdown():
                 break
