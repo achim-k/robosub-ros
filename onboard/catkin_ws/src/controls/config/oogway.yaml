@@ -11,9 +11,9 @@ pid:
       derivative_type: 1
       error_ramp_rate: 1000
     y:
-      Kp: 1.8
+      Kp: 1.5
       Ki: 0
-      Kd: 1.2
+      Kd: 1
       Ff: 0
       control_effort:
         min: -1
