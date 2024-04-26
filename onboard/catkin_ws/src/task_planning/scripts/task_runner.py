@@ -8,6 +8,8 @@ from interface.controls import Controls
 from interface.state import State
 from interface.cv import CV
 import move_tasks
+import comp_tasks
+import cv_tasks
 from utils import geometry_utils
 
 
@@ -56,9 +58,9 @@ def main():
 
     # Run tasks
     try:
-        # # SUBMERGING
+        # SUBMERGING
         # tasks = [
-        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.4, 0, 0, 0),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.5, 0, 0, 0),
         #                                   parent=Task.MAIN_ID),
         # ]
 
@@ -87,27 +89,31 @@ def main():
         # ]
 
         # PREQUAL
+        # tasks = [
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.8, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(7.25, 0, -0.3, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(7.25, 0, -0.3, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0.6, -0.1, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(3.5, 0.1, -0.1, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, -1.2, -0.1, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(-3.5, -0.1, -0.1, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0.6, -0.1, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(-7.5, 0, -0.3, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID),
+        #     move_tasks.move_to_pose_local(geometry_utils.create_pose(-7.5, 0, -0.3, 0, 0, 0),
+        #                                   parent=Task.MAIN_ID)
+        # ]
+
         tasks = [
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.6, 0, 0, 0),
-                                            parent=Task.MAIN_ID),
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(7.25, 0, -0.3, 0, 0, 0),
-                                            parent=Task.MAIN_ID),
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(7.25, 0, -0.3, 0, 0, 0),
-                                            parent=Task.MAIN_ID),
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0.6, -0.1, 0, 0, 0),
-                                            parent=Task.MAIN_ID),
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(3.5, 0.1, -0.1, 0, 0, 0),
-                                            parent=Task.MAIN_ID),
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, -1.2, -0.1, 0, 0, 0),
-                                            parent=Task.MAIN_ID),
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(-3.5, -0.1, -0.1, 0, 0, 0),
-                                            parent=Task.MAIN_ID),
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0.6, -0.1, 0, 0, 0),
-                                            parent=Task.MAIN_ID),
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(-7.5, 0, -0.3, 0, 0, 0),
-                                            parent=Task.MAIN_ID),
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(-7.5, 0, -0.3, 0, 0, 0),
-                                            parent=Task.MAIN_ID)
+            comp_tasks.prequal_task(parent=Task.MAIN_ID)
         ]
 
         # Step through tasks, stopping if rospy is shutdown
