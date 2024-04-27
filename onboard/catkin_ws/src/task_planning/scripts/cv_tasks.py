@@ -41,14 +41,14 @@ async def move_to_cv_obj(self: Task, name: str, stop_dist: float = 0, detection_
     # Get initial object location, detection timestamp
     pose = CV().get_pose(name)
     timestamp = CV().get_timestamp(name)
+    dist = geometry_utils.point_norm(pose.position)
 
     # Begin moving to the object
     move_task = move_to_pose_local(pose, global_pose_overrides=global_pose_overrides, parent=self)
     move_task.send(None)
 
     # Move until the robot has reached the object's pose
-    while geometry_utils.point_norm(pose.position) > stop_dist and \
-            timestamp > rospy.Time.now() - rospy.Duration(detection_timeout):
+    while dist > stop_dist and timestamp > rospy.Time.now() - rospy.Duration(detection_timeout):
         # Yield object's current pose and timestamp of last detection
         updated_obj = await Yield((pose, timestamp))
 
@@ -58,6 +58,7 @@ async def move_to_cv_obj(self: Task, name: str, stop_dist: float = 0, detection_
 
         pose = CV().get_pose(name)
         timestamp = CV().get_timestamp(name)
+        dist = geometry_utils.point_norm(pose.position)
 
         move_task.send(pose)
 
