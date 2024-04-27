@@ -33,31 +33,31 @@ pid:
     roll:
       Kp: 0.5
       Ki: 0
-      Kd: 0
+      Kd: 0.5
       Ff: 0
       control_effort:
-        min: -1
-        max: 1
+        min: -0.5
+        max: 0.5
       derivative_type: 1
       error_ramp_rate: 1000
     pitch:
       Kp: 0.5
       Ki: 0
-      Kd: 0
+      Kd: 0.5
       Ff: 0
       control_effort:
-        min: -1
-        max: 1
+        min: -0.5
+        max: 0.5
       derivative_type: 1
       error_ramp_rate: 1000
     yaw:
-      Kp: 0.5
+      Kp: 0.3
       Ki: 0
-      Kd: 1
+      Kd: 0.3
       Ff: 0
       control_effort:
-        min: -1
-        max: 1
+        min: -0.5
+        max: 0.5
       derivative_type: 1
       error_ramp_rate: 1000
   position_cascaded:
@@ -97,8 +97,8 @@ pid:
       Kd: 0.4
       Ff: 0
       control_effort:
-        min: -1
-        max: 1
+        min: -0.5
+        max: 0.5
       derivative_type: 1
       error_ramp_rate: 1000
     pitch:
@@ -107,8 +107,8 @@ pid:
       Kd: 0.4
       Ff: 0
       control_effort:
-        min: -1
-        max: 1
+        min: -0.5
+        max: 0.5
       derivative_type: 1
       error_ramp_rate: 1000
     yaw:
@@ -117,8 +117,8 @@ pid:
       Kd: 0.5
       Ff: 0
       control_effort:
-        min: -1
-        max: 1
+        min: -0.5
+        max: 0.5
       derivative_type: 1
       error_ramp_rate: 1000
   velocity:
@@ -158,8 +158,8 @@ pid:
       Kd: 0.01
       Ff: 0
       control_effort:
-        min: -1
-        max: 1
+        min: -0.5
+        max: 0.5
       derivative_type: 0
       error_ramp_rate: 1000
     pitch:
@@ -168,8 +168,8 @@ pid:
       Kd: 0.01
       Ff: 0
       control_effort:
-        min: -1
-        max: 1
+        min: -0.5
+        max: 0.5
       derivative_type: 0
       error_ramp_rate: 1000
     yaw:
@@ -178,8 +178,8 @@ pid:
       Kd: 0.01
       Ff: 0
       control_effort:
-        min: -1
-        max: 1
+        min: -0.5
+        max: 0.5
       derivative_type: 0
       error_ramp_rate: 1000
 desired_power_limits:
@@ -204,7 +204,7 @@ desired_power_limits:
 static_power_global:
   x: 0
   y: 0
-  z: -0.385
+  z: -0.37
 power_scale_factor: 1
 thrusters:
   - name: bottom_front_left
