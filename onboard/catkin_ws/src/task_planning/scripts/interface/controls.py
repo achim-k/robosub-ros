@@ -4,6 +4,7 @@ from std_srvs.srv import Trigger
 from geometry_msgs.msg import Pose, Twist
 from custom_msgs.msg import ControlTypes, ThrusterAllocs
 from custom_msgs.srv import SetControlTypes
+from std_srvs.srv import SetBool
 from utils.other_utils import singleton
 import resource_retriever as rr
 import os
@@ -30,6 +31,7 @@ class Controls:
     """
 
     # ROS service name for setting control types
+    ENABLE_CONTROLS_SERVICE = 'controls/enable'
     CONTROL_TYPES_SERVICE = 'controls/set_control_types'
     RESET_PID_LOOPS_SERVICE = 'controls/reset_pid_loops'
     DESIRED_POSITION_TOPIC = 'controls/desired_position'
@@ -42,6 +44,7 @@ class Controls:
         if not bypass:
             rospy.wait_for_service(self.CONTROL_TYPES_SERVICE)
         self._set_control_types = rospy.ServiceProxy(self.CONTROL_TYPES_SERVICE, SetControlTypes)
+        self._enable_controls = rospy.ServiceProxy(self.ENABLE_CONTROLS_SERVICE, SetBool)
         # Note: if this variable gets out of sync with the actual control types,
         # bad things may happen
         self._all_axes_control_type = None
@@ -105,6 +108,12 @@ class Controls:
             ))
         self._all_axes_control_type = type
         self.start_new_move()
+
+    def enable(self) -> None:
+        """
+        Enable controls. CAUTION: This is dangerous.
+        """
+        self._enable_controls(True)
 
     # Resets the PID loops. Should be called for every "new" movement
     def start_new_move(self) -> None:
