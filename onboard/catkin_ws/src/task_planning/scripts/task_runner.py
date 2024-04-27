@@ -8,6 +8,7 @@ from interface.controls import Controls
 from interface.state import State
 from interface.cv import CV
 import move_tasks
+import comp_tasks
 from utils import geometry_utils
 
 
@@ -58,9 +59,17 @@ def main():
     try:
         # Tasks to run
         tasks = [
-            move_tasks.move_to_pose_local(geometry_utils.create_pose(0, 0, -0.5, 0, 0, 0),
-                                          parent=Task.MAIN_ID)
+            comp_tasks.prequal_task(parent=Task.MAIN_ID),
         ]
+
+        # Countdown before starting tasks. For use when performing an untethered run.
+        # for i in range(10, 0, -1):
+        #     rospy.loginfo(f"Starting in {i} seconds")
+        #     rospy.sleep(1)
+
+        # CAUTION: Uncommenting this line will enable controls automatically. This is dangerous and should only be done
+        # when performing an untethered run and if you are certain the robot will not move unexpectedly.
+        # Controls().enable()
 
         # Step through tasks, stopping if rospy is shutdown
         rate = rospy.Rate(30)
